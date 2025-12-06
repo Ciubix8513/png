@@ -138,6 +138,37 @@ impl Image {
         }
     }
 
+    ///Removes the alpha channel from an image
+    pub fn strip_alpha(&mut self) {
+        match self.img_type {
+            ImageType::Ra8 => {
+                self.img_type = ImageType::R8;
+                self.data = self.data.chunks(2).map(|i| i[0]).collect();
+            }
+            ImageType::Ra16 => {
+                self.img_type = ImageType::R16;
+                self.data = self.data.chunks(4).flat_map(|i| [i[0], i[1]]).collect();
+            }
+            ImageType::Rgba8 => {
+                self.img_type = ImageType::Rgb8;
+                self.data = self
+                    .data
+                    .chunks(4)
+                    .flat_map(|i| [i[0], i[1], i[2]])
+                    .collect();
+            }
+            ImageType::Rgba16 => {
+                self.img_type = ImageType::Rgb16;
+                self.data = self
+                    .data
+                    .chunks(8)
+                    .flat_map(|i| [i[0], i[1], i[2], i[3], i[4], i[5]])
+                    .collect();
+            }
+            _ => {}
+        }
+    }
+
     ///Adds channels to a grayscale image. Does nothing if the image is not grayscale
     pub fn add_channels(&mut self) {
         match self.img_type {
