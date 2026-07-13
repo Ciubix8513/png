@@ -39,6 +39,7 @@ pub enum ChunkType {
     acTL,
     fcTL,
     fdAT,
+    Unknown,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -149,7 +150,7 @@ pub fn get_chunk_type(data: [u8; 4]) -> Result<ChunkType, Error> {
         "acTL" => Ok(ChunkType::acTL),
         "fcTL" => Ok(ChunkType::fcTL),
         "fdAT" => Ok(ChunkType::fdAT),
-        _ => Err(Error::InvalidChunkType),
+        _ => Ok(ChunkType::Unknown),
     }
 }
 
