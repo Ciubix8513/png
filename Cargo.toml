@@ -1,8 +1,8 @@
 [package]
 name = "lunar-png"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2024"
-repository = "https://github.com/Ciubix8513/lunar-logger"
+repository = "https://github.com/Ciubix8513/lunar-png"
 license = "MIT"
 description = "Simple library for encoding and decoding png images"
 readme = "README.md"
